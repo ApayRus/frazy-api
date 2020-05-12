@@ -1,0 +1,7 @@
+{
+	"name": "mongo_uri",
+	"version": 2,
+	"env": {
+		"mongo_uri": "@mongo_uri"
+	}
+}
