@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 const connection = {}
 
 async function dbConnect() {
+	console.log('process.env', process.env)
 	if (connection.isConnected) {
 		return
 	}
