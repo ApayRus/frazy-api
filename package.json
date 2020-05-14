@@ -1,16 +1,17 @@
 {
-  "name": "next-app",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "mongoose": "^5.9.13",
-    "next": "9.3.6",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+    "name": "next-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "firebase-admin": "^8.12.1",
+        "mongoose": "^5.9.13",
+        "next": "9.3.6",
+        "react": "16.13.1",
+        "react-dom": "16.13.1"
+    }
 }
