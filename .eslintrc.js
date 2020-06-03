@@ -1,13 +1,15 @@
 module.exports = {
-    extends: ["airbnb", "prettier"],
+    extends: ['airbnb', 'prettier'],
 
-    plugins: ["prettier"],
+    plugins: ['prettier'],
     rules: {
-        "consistent-return": "off",
-        "no-shadow": "off",
-        "react/react-in-jsx-scope": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "react/jsx-indent": "off",
-        "react/jsx-indent-props": "off",
-    },
+        'consistent-return': 'off',
+        'no-shadow': 'off',
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-one-expression-per-line': 'off',
+        'react/jsx-indent': 'off',
+        'react/jsx-indent-props': 'off',
+        'import/prefer-default-export': 'off',
+        'no-underscore-dangle': 'off'
+    }
 }
