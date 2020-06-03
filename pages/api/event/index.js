@@ -22,7 +22,14 @@ export default async(req, res) => {
             try {
                 await checkFirebaseAuth(req, res)
                 const { _id = '', action } = req.body
-                delete req.body.action
+
+                if (!action) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'body.action should be "create" or "update"'
+                    })
+                }
+
                 let event = {}
 
                 if (action === 'create') {
@@ -39,7 +46,7 @@ export default async(req, res) => {
                 if (!event) {
                     return res
                         .status(400)
-                        .json({ success: false, message: 'problem while writing data' })
+                        .json({ success: false, message: 'problem while writing event' })
                 }
                 res.status(200).json({ success: true, data: event })
             } catch (error) {

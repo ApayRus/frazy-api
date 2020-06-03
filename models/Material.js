@@ -41,6 +41,11 @@ const MaterialSchema = new mongoose.Schema({
         trim: true
     },
     phrases: { type: Object },
+    duration: {
+        type: Number,
+        trim: true
+    },
+
     created: UserSignatureSchema,
     updated: UserSignatureSchema
 })

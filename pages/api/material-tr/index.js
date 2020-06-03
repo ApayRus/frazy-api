@@ -22,8 +22,14 @@ export default async(req, res) => {
             try {
                 await checkFirebaseAuth(req, res)
                 const { _id = '', action } = req.body
-                delete req.body.action
-                console.log('action', action)
+
+                if (!action) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'body.action should be "create" or "update"'
+                    })
+                }
+
                 let materialTr = {}
 
                 if (action === 'create') {
@@ -31,7 +37,7 @@ export default async(req, res) => {
                     materialTr = await MaterialTr.create(req.body)
                 } else {
                     addUserSignature(req, 'update')
-                    await MaterialTr.findByIdAndUpdate(_id, req.body, {
+                    materialTr = await MaterialTr.findByIdAndUpdate(_id, req.body, {
                         new: true,
                         runValidators: true
                     }).lean()
@@ -40,7 +46,10 @@ export default async(req, res) => {
                 if (!materialTr) {
                     return res
                         .status(400)
-                        .json({ success: false, message: 'problem while writing data' })
+                        .json({
+                            success: false,
+                            message: 'problem while writing translation'
+                        })
                 }
                 res.status(200).json({ success: true, data: materialTr })
             } catch (error) {
