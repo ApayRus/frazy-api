@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 import UserSignatureSchema from './UserSignatureSchema'
 
-const MaterialSchema = new mongoose.Schema({
+// Material Translation
+const MaterialTrSchema = new mongoose.Schema({
     _id: {
         type: String,
         trim: true,
@@ -12,31 +13,19 @@ const MaterialSchema = new mongoose.Schema({
         required: [true, 'Please add a title'],
         trim: true
     },
+    // materialId
+    for: {
+        type: String,
+        required: [true, 'Please add a title'],
+        trim: true
+    },
     lang: {
         type: String,
         required: [true, 'Please add a language code'],
         maxlength: [3, 'max length is 3 symbols'],
         trim: true
     },
-    mediaLink: {
-        type: String,
-        required: [true, 'Please upload a file or add an external media link'],
-        trim: true
-    },
-    youtubeId: {
-        type: String,
-        trim: true,
-        maxlength: 11
-    },
     description: {
-        type: String,
-        trim: true
-    },
-    unit: {
-        type: String,
-        trim: true
-    },
-    order: {
         type: String,
         trim: true
     },
@@ -46,5 +35,5 @@ const MaterialSchema = new mongoose.Schema({
 })
 
 module.exports =
-    mongoose.models.Material ||
-    mongoose.model('Material', MaterialSchema, 'material')
+    mongoose.models.MaterialTr ||
+    mongoose.model('MaterialTr', MaterialTrSchema, 'material-tr')
