@@ -12,8 +12,17 @@ export default async(req, res) => {
         case 'GET':
             //
             try {
-                const materialTrs = await MaterialTr.find(req.query)
-                res.status(200).json({ success: true, data: materialTrs })
+                const { _id } = req.query
+                    // MULTIPLE
+                if (!_id) {
+                    const materialTrs = await MaterialTr.find(req.query)
+                    res.status(200).json({ success: true, data: materialTrs })
+                }
+                // SINGLE
+                else {
+                    const materialTr = await MaterialTr.findById(_id)
+                    res.status(200).json({ success: true, data: materialTr })
+                }
             } catch (error) {
                 res.status(400).json({ success: false })
             }
@@ -44,12 +53,10 @@ export default async(req, res) => {
                 }
 
                 if (!materialTr) {
-                    return res
-                        .status(400)
-                        .json({
-                            success: false,
-                            message: 'problem while writing translation'
-                        })
+                    return res.status(400).json({
+                        success: false,
+                        message: 'problem while writing translation'
+                    })
                 }
                 res.status(200).json({ success: true, data: materialTr })
             } catch (error) {
