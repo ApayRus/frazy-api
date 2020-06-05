@@ -1,5 +1,6 @@
 import dbConnect from '../../../utils/dbConnect'
 import Material from '../../../models/Material'
+import MaterialTr from '../../../models/MaterialTr'
 import checkFirebaseAuth from '../../../firebase/authCheck'
 import { addUserSignature } from '../../../utils/functions'
 
@@ -12,8 +13,23 @@ export default async(req, res) => {
         case 'GET':
             //
             try {
-                const materials = await Material.find(req.query)
-                res.status(200).json({ success: true, data: materials })
+                const { _id } = req.query
+                    // MULTIPLE - returns array of materials
+                if (!_id) {
+                    const materials = await Material.find(req.query)
+                    res.status(200).json({ success: true, data: materials })
+                }
+                // SINGLE - returns one material with translations info
+                else {
+                    const materialPromise = Material.findById(_id)
+                    const translationsPromise = MaterialTr.find({ for: _id }, { _id: 1, lang: 1, title: 1 })
+                    const [material, translations = []] = await Promise.all([
+                        materialPromise,
+                        translationsPromise
+                    ])
+                    const response = {...material._doc, translations }
+                    res.status(200).json({ success: true, data: response })
+                }
             } catch (error) {
                 res.status(400).json({ success: false })
             }
