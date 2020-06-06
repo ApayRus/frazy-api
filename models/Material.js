@@ -45,6 +45,7 @@ const MaterialSchema = new mongoose.Schema({
         type: Number,
         trim: true
     },
+    // translations: [ { _id, title, lang } ] - agregated field only on read
 
     created: UserSignatureSchema,
     updated: UserSignatureSchema
