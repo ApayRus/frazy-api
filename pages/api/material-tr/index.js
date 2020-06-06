@@ -12,16 +12,23 @@ export default async(req, res) => {
         case 'GET':
             //
             try {
-                const { _id } = req.query
-                    // MULTIPLE
-                if (!_id) {
-                    const materialTrs = await MaterialTr.find(req.query)
-                    res.status(200).json({ success: true, data: materialTrs })
-                }
-                // SINGLE
-                else {
+                const { _id, for: forMaterial, lang } = req.query
+                    // SINGLE
+                if (_id) {
                     const materialTr = await MaterialTr.findById(_id)
                     res.status(200).json({ success: true, data: materialTr })
+                }
+                if (forMaterial && lang) {
+                    const materialTr = await MaterialTr.findOne({
+                        for: forMaterial,
+                        lang
+                    })
+                    res.status(200).json({ success: true, data: materialTr })
+                }
+                // MULTIPLE
+                else {
+                    const materialTrs = await MaterialTr.find(req.query)
+                    res.status(200).json({ success: true, data: materialTrs })
                 }
             } catch (error) {
                 res.status(400).json({ success: false })
