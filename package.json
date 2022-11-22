@@ -10,7 +10,7 @@
     "dependencies": {
         "firebase-admin": "^8.12.1",
         "mongoose": "^5.9.13",
-        "next": "9.3.6",
+        "next": "13.0.4",
         "react": "16.13.1",
         "react-dom": "16.13.1"
     },
